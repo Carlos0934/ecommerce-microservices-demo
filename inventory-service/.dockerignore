@@ -1,0 +1,36 @@
+# Ignore build artifacts
+bin/
+obj/
+
+# Ignore NuGet packages
+*.nupkg
+
+# Ignore Visual Studio files
+.vs/
+.vscode/
+
+# Ignore user-specific files
+*.user
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore Docker-related files
+.dockerignore
+.dockerfile
+
+# Ignore development and debugging files
+*.sln
+*.csproj.user
+*.pdb
+*.vspscc
+*.vssscc
+*.vssettings
+*.suo
+*.cache
+*.bak
+*.cache
+*.bak
+*.userprefs
+*.sln.docstates
