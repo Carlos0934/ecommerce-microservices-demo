@@ -17,8 +17,11 @@ spec:
         app: catalog-api
     spec:
       containers:
-      - name: catalog-api
-        image: catalog-api:latest
+      - name: catalog-service
+        image: carlosengel013/catalog-service:latest
+        volumeMounts:
+        - name: catalog-service-storage
+          mountPath: /var/lib/catalog-service
         ports:
         - containerPort: 8000
         livenessProbe:
@@ -33,3 +36,13 @@ spec:
             port: 8080
           initialDelaySeconds: 15
           periodSeconds: 10
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      volumes:  
+      - name: catalog-service-storage
+        emptyDir: {}

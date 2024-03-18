@@ -28,7 +28,7 @@ jobs:
           context: ./catalog-service
           file: ./catalog-service/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/catalog-service:lastest
+          tags: ${{ secrets.DOCKER_USERNAME }}/catalog-service:latest
 
       - name: Build and push Order Service Docker image
         uses: docker/build-push-action@v5
@@ -36,7 +36,7 @@ jobs:
           context: ./order-service
           file: ./order-service/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/order-service:lastest
+          tags: ${{ secrets.DOCKER_USERNAME }}/order-service:latest
 
       - name: Build and push Inventory Service Docker image
         uses: docker/build-push-action@v5
@@ -44,4 +44,4 @@ jobs:
           context: ./inventory-service
           file: ./inventory-service/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/inventory-service:lastest
+          tags: ${{ secrets.DOCKER_USERNAME }}/inventory-service:latest
