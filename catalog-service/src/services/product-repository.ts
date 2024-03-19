@@ -1,5 +1,5 @@
-import { Product } from "../domain/item.ts";
-import { ProductLoader } from "../domain/product-loader.ts";
+import { Product } from "../domain/item";
+import { ProductLoader } from "../domain/product-loader";
 
 export class ProductRepository {
   constructor(private productLoader: ProductLoader) {}

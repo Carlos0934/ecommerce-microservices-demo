@@ -1,11 +1,5 @@
-import { Product } from "./item.ts";
+import { Product } from "./item";
 
 export interface ProductLoader {
-  load(): Promise<void>;
-
-  isLoaded(): Promise<boolean>;
-
-  clear(): Promise<void>;
-
   getProducts(): Promise<Product[]>;
 }

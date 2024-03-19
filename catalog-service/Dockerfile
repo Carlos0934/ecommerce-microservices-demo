@@ -1,12 +1,32 @@
+FROM node:20.0-alpine 
 
-FROM denoland/deno:1.41.3
+# Create app directory
 
-WORKDIR /app
+WORKDIR /app 
 
-COPY . /app
+# Copy package.json and package-lock.json
 
+COPY package*.json ./
+
+# Install app dependencies
+
+RUN npm install
+
+# Bundle app source
+
+COPY . .
+
+# Expose port
 EXPOSE 8000
 
-RUN deno cache src/main.ts
+ARG AWS_ACCESS_KEY_ID 
+ARG AWS_SECRET_ACCESS_KEY
 
-CMD ["run","--allow-write", "--allow-read", "--allow-net", "src/main.ts"]
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+
+
+
+# Start the app
+
+CMD ["npm", "start"]
