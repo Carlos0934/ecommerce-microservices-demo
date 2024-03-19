@@ -21,6 +21,7 @@ export class FileProductLoader implements ProductLoader {
 
   async load(): Promise<void> {
     const res = await fetch(AMAZON_PRODUCTS_ZIP_URL);
+
     const file = await Deno.open(this.filePath, {
       write: true,
       create: true,

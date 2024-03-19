@@ -3,9 +3,8 @@ import { ProductRepository } from "../src/services/product-repository.ts";
 import { seed } from "../src/utils/seed.ts";
 import { Hono } from "https://deno.land/x/hono@v4.0.0-rc.4/mod.ts";
 
-await fetch("https://google.com");
 const productLoader = new FileProductLoader("products.json");
-
+await seed(productLoader);
 const productRepository = new ProductRepository(productLoader);
 
 const app = new Hono();
@@ -26,7 +25,6 @@ app.get("/products/:id", async (ctx) => {
 });
 
 app.get("/health", async (ctx) => {
-  await seed(productLoader);
   return new Response("OK");
 });
 
