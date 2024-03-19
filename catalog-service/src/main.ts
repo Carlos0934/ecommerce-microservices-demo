@@ -7,8 +7,6 @@ const productLoader = new FileProductLoader("products.json");
 
 const productRepository = new ProductRepository(productLoader);
 
-await seed(productLoader);
-
 const app = new Hono();
 
 app.get("/products", async (ctx) => {
@@ -27,6 +25,7 @@ app.get("/products/:id", async (ctx) => {
 });
 
 app.get("/health", async (ctx) => {
+  await seed(productLoader);
   return new Response("OK");
 });
 

@@ -1,3 +1,4 @@
+
 apiVersion: apps/v1
 kind: Deployment
 
@@ -24,6 +25,7 @@ spec:
           mountPath: /var/lib/catalog-service
         ports:
         - containerPort: 8000
+        - containerPort: 80
         livenessProbe:
           httpGet:
             path: /health
@@ -38,11 +40,44 @@ spec:
           periodSeconds: 10
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
+            memory: "256Mi"
             cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
       volumes:  
       - name: catalog-service-storage
         emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: catalog-service
+  labels:
+    app: catalog-service
+
+spec:
+  selector:
+    app: catalog-service
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-outbound-http
+spec:
+  podSelector: {
+    matchLabels: {
+      app: catalog-api
+    }
+  }
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - port: 80 # Puerto HTTP
+      protocol: TCP
